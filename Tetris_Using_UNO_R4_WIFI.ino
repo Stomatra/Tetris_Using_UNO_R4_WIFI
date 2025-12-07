@@ -117,7 +117,10 @@ void moveDown() {
 
 // 游戏结束处理
 void gameOver() {
-	Serial.print("Game Over!Your Score:" + score);
+	Serial.print("Game Over!Your Score:");
+	Serial.print(score);
+	Serial.print("\nRestarting Game...\n");
+	score = 0;
 	memset(finalGrid, 0, sizeof(finalGrid));
 	memset(newGrid, 0, sizeof(newGrid));
 	memset(readyGrid, 0, sizeof(readyGrid));
@@ -127,7 +130,7 @@ void gameOver() {
 
 //初始化游戏状态
 void GameStart() {
-	Serial.print("Game Start!");
+	Serial.print("Game Start!\n");
 	memset(finalGrid, 0, sizeof(finalGrid));
 	memset(newGrid, 0, sizeof(newGrid));
 	memset(readyGrid, 0, sizeof(readyGrid));
@@ -250,16 +253,6 @@ void clearLastLine() {
 	}
 }
 
-// the setup function runs once when you press reset or power the board
-void setup() {
-	Serial.begin(115200);
-	Serial.setTimeout(1000);
-	matrix.begin();
-	Keyboard.begin();
-	Mouse.begin();
-	Serial.print("Initialized successfully");
-}
-
 void tempGridSet() {
 	memset(tempGrid, 0, sizeof(tempGrid));
 	for (int m = 0; m < 8; m++) {
@@ -269,6 +262,16 @@ void tempGridSet() {
 			}
 		}
 	}
+}
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+	Serial.begin(115200);
+	Serial.setTimeout(1000);
+	matrix.begin();
+	Keyboard.begin();
+	Mouse.begin();
+	Serial.print("Initialized successfully");
 }
 
 // the loop function runs over and over again until power down or reset
